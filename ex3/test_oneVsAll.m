@@ -1,17 +1,21 @@
-function test_oneVsAll()
-    epsilon = 1e-4;
-    
-    % TODO: set all these vals properly.
-    % TODO: Even better, set up an architecture by which we can add multiple
-    % test values (and a label for tests) and run the assertions in a loop. -ETJ 04 Apr 2014
-    X = 0; 
-    y = 0; 
-    num_labels = 0;
-    lambda = 0;
-    all_theta_expected = 1;
-    
-    
-    all_theta = oneVsAll(X, y, num_labels, lambda)
-    
-    assert( all_theta, all_theta_expected, epsilon);
-end
+function test_oneVsAll ()
+  epsilon = 1e-3;
+  
+  % training x < 1.5 = 1
+  %          x > 1.5 = 2
+  X = [0 1 2 3 4 5]';
+  y = [1 1 1 2 2 2]'; % direct classification
+  num_labels = 2;
+  
+  % basic dimensionality, no lambda
+  all_theta = oneVsAll(X, y, num_labels, 0);
+  
+  % proper dimensionality of theta
+  assert(size(all_theta), [2 2]);
+
+  assert( all_theta, [ 141.08114 -56.71746;
+                      -131.54902  52.86713], epsilon)
+                      
+  % ANSWER PREDICTION SPECIFICALLY LEFT OUT OF THIS EXERCISE
+  % AS IT WILL BE CODED IN THE NEXT EXERCISE
+endfunction
